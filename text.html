@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文本元素 - Galacean Effects demo</title>
+  <style>
+    html, body, div, canvas { margin: 0; padding: 0; }
+    .container {
+      width: 375px;
+      height: 812px;
+      background-color: rgba(0,0,0,255);
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="J-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@galacean/effects@2.2.1/dist/index.min.js"></script>
+  <!--
+  Note: Please do not use the above CDN links in the production environment!
+  注意：请不要在生产环境使用上面的 CDN 链接！
+  -->
+
+  <script>
+    try {
+      var player = new ge.Player({
+        container: document.getElementById('J-container'),
+      });
+
+      player
+        .loadScene('./assets/text.json', {
+          // 加载时替换变量
+          variables: {
+            text_1: 'Galacean Effects'.toLocaleUpperCase().split('').reverse().join(''),
+          },
+        })
+        .then(composition => {
+          const textItem = composition.getItemByName('text_2');
+          const textComponent = textItem?.getComponent(window.ge.TextComponent);
+
+          textComponent?.setTextColor([255, 0, 0, 1]);
+
+          setTimeout(() => {
+            // 1.5 秒后替换文本
+            textComponent?.setText('基于 Web\n效果丰富，氛围粒子、陀螺仪特效、3D 模型渲染\n100%还原');
+          }, 1500);
+        });
+    } catch (e) {
+      // 降级处理，详见：https://www.galacean.com/effects/user/xz110ggg6x7mdvs5
+      console.error(err);
+    }
+  </script>
+</body>
+</html>

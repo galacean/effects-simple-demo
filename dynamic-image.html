@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>动态换图 - Galacean Effects demo</title>
+  <style>
+    html, body, div, canvas { margin: 0; padding: 0; }
+    .container {
+      width: 375px;
+      height: 812px;
+      background-color: rgba(0,0,0,255);
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="J-container"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@galacean/effects@2.2.1/dist/index.min.js"></script>
+  <!--
+  Note: Please do not use the above CDN links in the production environment!
+  注意：请不要在生产环境使用上面的 CDN 链接！
+  -->
+
+  <script>
+    try {
+      var player = new ge.Player({
+        container: document.getElementById('J-container'),
+      });
+
+      // 了解“动态换图”：https://galacean.antgroup.com/effects/user/oyvu6mxzo4n860me
+      player.loadScene('./assets/dynamic-image.json', {
+        variables: {
+          image: './assets/original.gif',
+        },
+      });
+    } catch (e) {
+      // 降级处理，详见：https://www.galacean.com/effects/user/xz110ggg6x7mdvs5
+      console.error(err);
+    }
+  </script>
+</body>
+</html>
